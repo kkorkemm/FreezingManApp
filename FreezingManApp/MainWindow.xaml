@@ -4,9 +4,61 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FreezingManApp"
+        xmlns:viewModel="clr-namespace:FreezingManApp.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        Icon="Images/snow.ico">
+
+    <Window.DataContext>
+        <viewModel:MainViewModel/>
+    </Window.DataContext>
+    
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.2*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Background="#577399"
+              Grid.ColumnSpan="2"/>
+
+        <!--Иконка-->
+        <Image Source="Images/snow.png"
+               Height="40"
+               Margin="10"/>
+
+        <!--Название приложения-->
+        <TextBlock Text="Freezing Man Application"
+                   Style="{StaticResource H1}"
+                   Foreground="White"
+                   Grid.Column="1"/>
+
+        <!--Боковое меню-->
+        <StackPanel Grid.Row="1">
+            <RadioButton Content="Список лагерей"
+                         Style="{StaticResource MenuButton}"
+                         Height="50"
+                         IsChecked="True"
+                         Command="{Binding ListCommand}"/>
+            <RadioButton Content="Карта фестиваля"
+                         Style="{StaticResource MenuButton}"
+                         Height="50"
+                         Command="{Binding MapCommand}"/>
+        </StackPanel>
+
+        <Grid Background="#eee"
+              Grid.Row="1"
+              Grid.Column="1"/>
+
+        <ContentControl Content="{Binding CurrentView}"
+                        Grid.Column="1"
+                        Grid.Row="1"
+                        Margin="20"/>
+
     </Grid>
 </Window>
