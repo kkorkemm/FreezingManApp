@@ -13,11 +13,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Win32;
 
 namespace FreezingManApp.Pages
 {
     using Base;
-    using Microsoft.Win32;
 
     /// <summary>
     /// Логика взаимодействия для CardPage.xaml
@@ -36,6 +36,9 @@ namespace FreezingManApp.Pages
             ComboStatuses.ItemsSource = AppData.GetContext().Status.ToList();
         }
 
+        /// <summary>
+        /// Редактирование изображения лагеря
+        /// </summary>
         private void BtnChange_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog fileDialog = new OpenFileDialog()
@@ -45,15 +48,21 @@ namespace FreezingManApp.Pages
 
             if (fileDialog.ShowDialog() == true)
             {
+                byte[] imageData;
 
+                using (FileStream fs = new FileStream(fileDialog.FileName, FileMode.Open))
+                {
+                    imageData = new byte[fs.Length];
+                    fs.Read(imageData, 0, imageData.Length);
+                }
+
+                ImageCamp.Source = new BitmapImage(new Uri(fileDialog.FileName));
             }
         }
 
         /// <summary>
         /// Удаление изображения
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show("Удалить изображение лагеря?", "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Question);
@@ -105,7 +114,7 @@ namespace FreezingManApp.Pages
         /// </summary>
         private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
-            Navigation.MainFrame.Navigate(new ListPage());
+            Navigation.MainFrame.GoBack();
         }
     }
 }

@@ -13,18 +13,20 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace FreezingManApp.View
+namespace FreezingManApp.UserControls
 {
     /// <summary>
-    /// Логика взаимодействия для ListView.xaml
+    /// Логика взаимодействия для CampUserControl.xaml
     /// </summary>
-    public partial class ListView
+    public partial class CampUserControl : UserControl
     {
-        public ListView()
+        public string Title { get; set; }
+        public ImageSource CampImage { get; set; }
+
+        public CampUserControl()
         {
             InitializeComponent();
-            ListFrame.Navigate(new Pages.ListPage());
-            Navigation.MainFrame = ListFrame;
+            DataContext = this;
         }
     }
 }

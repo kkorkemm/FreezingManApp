@@ -4,11 +4,132 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:FreezingManApp.Pages"
+      xmlns:userControls="clr-namespace:FreezingManApp.UserControls"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MapPage">
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <WrapPanel Orientation="Horizontal"
+                   HorizontalAlignment="Center"
+                   Margin="0 0 0 20">
+
+            <StackPanel Orientation="Horizontal"
+                        Margin="10">
+                <TextBlock Text="Type: "/>
+                <ComboBox x:Name="ComboTypes"
+                          DisplayMemberPath="Name"
+                          Width="150"
+                          VerticalAlignment="Center"
+                          SelectionChanged="ComboTypes_SelectionChanged"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal"
+                        Margin="10">
+                <TextBlock Text="Status: "/>
+                <ComboBox x:Name="ComboStatuses"
+                          DisplayMemberPath="Name"
+                          Width="150"
+                          VerticalAlignment="Center"
+                          SelectionChanged="ComboStatuses_SelectionChanged"/>
+            </StackPanel>
+
+        </WrapPanel>
+
+        <ScrollViewer Grid.Row="1"
+                      x:Name="ScrollMap"
+                      MouseMove="ScrollMap_MouseMove">
+
+            <Grid>
+                <Image Source="../Images/sand_texture.jpeg"
+                       Stretch="Fill"/>
+                <ListView Background="Transparent"
+                          PreviewMouseDown="ListView_PreviewMouseDown"
+                          ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                          ScrollViewer.VerticalScrollBarVisibility="Auto">
+
+                    <ItemsControl x:Name="CampList">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <Canvas/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                        <ItemsControl.ItemContainerStyle>
+                            <Style TargetType="ContentPresenter">
+                                <Setter Property="Canvas.Top" Value="{Binding PositionY}"/>
+                                <Setter Property="Canvas.Left" Value="{Binding PositionX}"/>
+                            </Style>
+                        </ItemsControl.ItemContainerStyle>
+
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock Text="{Binding Title}"
+                                           FontWeight="SemiBold"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center"
+                                           Margin="0 0 0 5"/>
+
+                                    <Viewbox x:Name="ViewImage"
+                                         Grid.Row="1"
+                                         Width="50"
+                                         Height="50">
+                                        <Border CornerRadius="50"
+                                                BorderThickness="0"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center"
+                                                Cursor="Hand">
+                                            <Image>
+                                                <Image.Source>
+                                                    <Binding Path="CampImage">
+                                                        <Binding.TargetNullValue>
+                                                            <ImageSource>
+                                                                ../Images/snow.png
+                                                            </ImageSource>
+                                                        </Binding.TargetNullValue>
+                                                    </Binding>
+                                                </Image.Source>
+                                            </Image>
+                                        </Border>
+                                    </Viewbox>
+
+                                </Grid>
+
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ListView>
+            </Grid>
+            
+        </ScrollViewer>
+
+        <StackPanel Grid.Row="2"
+                    Orientation="Horizontal"
+                    Margin="10"
+                    HorizontalAlignment="Right">
+
+            <TextBlock Text="X: "/>
+            <TextBlock x:Name="TextX"/>
+
+            <TextBlock Text="; "
+                       Margin="0 0 10 0"/>
+
+            <TextBlock Text="Y: "/>
+            <TextBlock x:Name="TextY"/>
+        </StackPanel>
         
     </Grid>
 </Page>

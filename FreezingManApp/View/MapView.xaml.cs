@@ -18,7 +18,7 @@ namespace FreezingManApp.View
     /// <summary>
     /// Логика взаимодействия для MapView.xaml
     /// </summary>
-    public partial class MapView : UserControl
+    public partial class MapView
     {
         public MapView()
         {
