@@ -9,7 +9,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Border Background="{TemplateBinding Background}"
-                            Padding="5 10 5 10"
+                            Padding="5"
                             Cursor="Hand"
                             BorderThickness="0">
                         <ContentPresenter Content="{TemplateBinding Content}"

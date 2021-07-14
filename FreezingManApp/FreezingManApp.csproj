@@ -86,6 +86,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Base\PartialCamp.cs" />
     <Compile Include="Base\Status.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

@@ -20,7 +20,7 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.2*"/>
+            <ColumnDefinition Width="0.25*"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
@@ -29,7 +29,7 @@
 
         <!--Иконка-->
         <Image Source="Images/snow.png"
-               Height="40"
+               Height="50"
                Margin="10"/>
 
         <!--Название приложения-->

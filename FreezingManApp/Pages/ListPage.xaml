@@ -9,6 +9,120 @@
       Title="ListPage">
 
     <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!--Панель с фильтрами-->
+        <WrapPanel Orientation="Horizontal"
+                   HorizontalAlignment="Center">
+
+            <!--Фильтрация по типу лагеря-->
+            <StackPanel Orientation="Horizontal"
+                        Margin="10">
+
+                <TextBlock Text="Type: "
+                           Margin="5"/>
+
+                <ComboBox x:Name="ComboTypes"
+                          DisplayMemberPath="Name"
+                          Width="150"
+                          VerticalAlignment="Center"
+                          SelectionChanged="ComboTypes_SelectionChanged"/>
+
+            </StackPanel>
+
+            <!--Фильтрация по названию или описанию-->
+            <StackPanel Orientation="Horizontal"
+                        Margin="10">
+
+                <TextBlock Text="Title or Description: "
+                           Margin="5"/>
+
+                <TextBox x:Name="TextTitle"
+                         Width="150"
+                         VerticalAlignment="Center"
+                         TextChanged="TextTitle_TextChanged"/>
+                
+            </StackPanel>
+
+        </WrapPanel>
+
+        <!--Список лагерей-->
+        <ListView Grid.Row="1"
+                  x:Name="ListCamp"
+                  BorderThickness="0"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                  HorizontalContentAlignment="Center"
+                  Margin="0 20 0 0"
+                  PreviewMouseDown="ListCamp_PreviewMouseDown">
+
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="10"
+                          Background="{Binding IsRed}"
+                          Cursor="Hand"
+                          Width="400">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Image Height="200"
+                               Stretch="Uniform"
+                               Margin="5 5 5 10"
+                               HorizontalAlignment="Center">
+                            <Image.Source>
+                                <Binding Path="CampImage">
+                                    <Binding.TargetNullValue>
+                                        <ImageSource>
+                                            ../Images/snow.png
+                                        </ImageSource>
+                                    </Binding.TargetNullValue>
+                                </Binding>
+                            </Image.Source>
+                        </Image>
+
+                        <TextBlock Text="{Binding Title}"
+                                   Style="{StaticResource H2}"
+                                   Margin="5"
+                                   Grid.Row="1"
+                                   HorizontalAlignment="Center"/>
+
+                        <StackPanel Orientation="Horizontal"
+                                    Grid.Row="2"
+                                    Margin="5"
+                                    HorizontalAlignment="Center">
+                            <TextBlock Text="Type: "/>
+                            <TextBlock Text="{Binding Type.Name}"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal"
+                                    Grid.Row="3"
+                                    Margin="5"
+                                    HorizontalAlignment="Center">
+                            <TextBlock Text="Location: "/>
+                            <TextBlock Text="{Binding PositionX, StringFormat=({0}; }"/>
+                            <TextBlock Text="{Binding PositionY, StringFormat={} {0})}"/>
+                        </StackPanel>
+
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            
+        </ListView>
+        
         
     </Grid>
 </Page>

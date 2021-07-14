@@ -9,6 +9,184 @@
       Title="CardPage">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="{Binding Title}"
+                   Style="{StaticResource H1}"
+                   Margin="10"
+                   HorizontalAlignment="Center"/>
+
+        <Grid Grid.Row="1">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel VerticalAlignment="Center">
+
+                <StackPanel Orientation="Horizontal"
+                            Margin="0 5 0 5">
+                    <TextBlock Text="Type: "
+                               Width="150"
+                               TextAlignment="Right"
+                               FontWeight="SemiBold"
+                               Margin="0 0 10 0"/>
+
+                    <TextBlock Text="{Binding Type.Name}"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal"
+                            Margin="0 5 0 5">
+                    <TextBlock Text="Location X: "
+                               Width="150"
+                               TextAlignment="Right"
+                               FontWeight="SemiBold"
+                               Margin="0 0 10 0"/>
+
+                    <TextBox Text="{Binding PositionX}"
+                             Width="200"
+                             VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal"
+                            Margin="0 5 0 5">
+                    <TextBlock Text="Location Y: "
+                               Width="150"
+                               TextAlignment="Right"
+                               FontWeight="SemiBold"
+                               Margin="0 0 10 0"/>
+
+                    <TextBox Text="{Binding PositionY}"
+                             Width="200"
+                             VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal"
+                            Margin="0 5 0 5">
+                    <TextBlock Text="Status: "
+                               Width="150"
+                               TextAlignment="Right"
+                               FontWeight="SemiBold"
+                               Margin="0 0 10 0"/>
+
+                    <ComboBox x:Name="ComboStatuses"
+                              Width="200"
+                              DisplayMemberPath="Name"
+                              SelectedItem="{Binding Status}"
+                              VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal"
+                            Margin="0 5 0 5">
+                    <TextBlock Text="Start of Working Time: "
+                               Width="150"
+                               TextAlignment="Right"
+                               FontWeight="SemiBold"
+                               Margin="0 0 10 0"/>
+
+                    <TextBox Text="{Binding StartWorkingTime}"
+                             Width="200"
+                             VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal"
+                            Margin="0 5 0 5">
+                    <TextBlock Text="End of Working Time: "
+                               Width="150"
+                               TextAlignment="Right"
+                               FontWeight="SemiBold"
+                               Margin="0 0 10 0"/>
+
+                    <TextBox Text="{Binding EndWorkingTime}"
+                             Width="200"
+                             VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal"
+                            Margin="0 5 0 5">
+                    <TextBlock Text="Description: "
+                               Width="150"
+                               TextAlignment="Right"
+                               FontWeight="SemiBold"
+                               Margin="0 0 10 0"/>
+
+                    <TextBox Text="{Binding Description}"
+                             Width="200"
+                             VerticalAlignment="Center"
+                             Height="60"
+                             TextWrapping="Wrap"/>
+                </StackPanel>
+                
+            </StackPanel>
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <WrapPanel Orientation="Horizontal"
+                           HorizontalAlignment="Center"
+                           Margin="5">
+                    
+                    <Button Content="Change"
+                            Width="150"
+                            Style="{StaticResource BlueButton}"
+                            x:Name="BtnChange"
+                            Click="BtnChange_Click"
+                            Margin="10"/>
+
+                    <Button Content="Delete"
+                            Width="150"
+                            Style="{StaticResource DarkBlueButton}"
+                            x:Name="BtnDelete"
+                            Click="BtnDelete_Click"
+                            Margin="10"/>
+
+                </WrapPanel>
+
+                <Image Grid.Row="1"
+                       Margin="20"
+                       x:Name="ImageCamp">
+                    <Image.Source>
+                        <Binding Path="CampImage">
+                            <Binding.TargetNullValue>
+                                <ImageSource>
+                                    ../Images/snow.png
+                                </ImageSource>
+                            </Binding.TargetNullValue>
+                        </Binding>
+                    </Image.Source>
+                </Image>
+
+            </Grid>
+            
+        </Grid>
+
+        <WrapPanel Orientation="Horizontal"
+                   HorizontalAlignment="Center"
+                   Grid.Row="2">
+
+            <Button x:Name="BtnSave"
+                    Click="BtnSave_Click"
+                    Content="Save"
+                    Style="{StaticResource DarkBlueButton}"
+                    Width="150"
+                    Margin="10"/>
+
+            <Button x:Name="BtnBack"
+                    Click="BtnBack_Click"
+                    Content="Back"
+                    Style="{StaticResource BlueButton}"
+                    Width="150"
+                    Margin="10"/>
+
+        </WrapPanel>
+
     </Grid>
 </Page>
